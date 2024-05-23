@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>コピペ中継所</title>
+    <style>
+        body {
+            font-family: 'ヒラギノゴシック', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 20px;
+        }
+        textarea {
+            width: 80%;
+            height: 500px;
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+        .buttons {
+            margin-bottom: 20px;
+        }
+        .buttons button {
+            font-size: 16px;
+            margin-right: 10px;
+        }
+        #charCount {
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <h1>コピペ中継所</h1>
+    <textarea id="mainTextArea" placeholder="ここにテキストを入力..."></textarea>
+    <div class="buttons">
+        <button onclick="selectAllText()">全選択</button>
+        <button onclick="copyText()">全コピー</button>
+        <button onclick="clearText()">全削除</button>
+    </div>
+    <div id="charCount">文字数: 0</div>
+
+    <script>
+        const textArea = document.getElementById('mainTextArea');
+        const charCount = document.getElementById('charCount');
+
+        textArea.addEventListener('input', () => {
+            charCount.textContent = `文字数: ${textArea.value.length}`;
+        });
+
+        function selectAllText() {
+            textArea.select();
+        }
+
+        function copyText() {
+            textArea.select();
+            document.execCommand('copy');
+            alert('コピーされました!');
+        }
+
+        function clearText() {
+            textArea.value = '';
+            charCount.textContent = '文字数: 0';
+        }
+    </script>
+</body>
+</html>
